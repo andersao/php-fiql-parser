@@ -1,0 +1,30 @@
+{
+  "name": "anderson/php-fiql-parser",
+  "type": "library",
+  "keywords": [
+    "fiql"
+  ],
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Prettus\\FIQL\\": "src/"
+    }
+  },
+  "scripts": {
+    "test": "pest",
+    "test:unit": "@test --watch"
+  },
+  "authors": [
+    {
+      "name": "Anderson Andrade",
+      "email": "anderson.asa89@gmail.com"
+    }
+  ],
+  "config": {
+    "preferred-install": "dist"
+  },
+  "require-dev": {
+    "pestphp/pest": "^1.20",
+    "pestphp/pest-plugin-watch": "dev-master"
+  }
+}
