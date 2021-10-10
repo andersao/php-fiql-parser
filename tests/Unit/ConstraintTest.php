@@ -30,3 +30,14 @@ test('constraint set parent', function() {
     $constraint->setParent($expression);
     expect($constraint->getParent())->toEqual($expression);
 });
+
+test('constraint fluent', function() {
+    $constraint = (new Constraint('foo', '==', 'bar'))->opOr(
+        (new Constraint('age', '=lt=', '55'))->opAnd(
+            new Constraint('age', '=gt=', '5')
+        )
+    );
+
+    expect($constraint)->toBeInstanceOf(Expression::class);
+    expect(strval($constraint))->toEqual("foo==bar,age=lt=55;age=gt=5");
+})->group('constraint');

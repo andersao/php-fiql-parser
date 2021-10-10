@@ -3,6 +3,7 @@ namespace Prettus\FIQL;
 
 use \Prettus\FIQL\Exceptions\FIQLObjectException;
 use \Prettus\FIQL\Contracts\Element;
+use \Prettus\FIQL\Expression;
 use \Prettus\FIQL\Element as BaseElement;
 
 class Constraint extends BaseElement {
@@ -17,5 +18,15 @@ class Constraint extends BaseElement {
 
     public function __toString() {
         return sprintf('%s%s%s', $this->selector, $this->comparison, $this->argument);
+    }
+
+    public function opOr(...$elements) {
+        $expression = new Expression();
+        return $expression->opOr($this, ...$elements);
+    }
+
+    public function opAnd(...$elements) {
+        $expression = new Expression();
+        return $expression->opAnd($this, ...$elements);
     }
 }

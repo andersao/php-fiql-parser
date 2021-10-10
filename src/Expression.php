@@ -77,7 +77,17 @@ class Expression extends BaseElement {
     }
 
     public function __toString() {
-        $operator = $this->operator;
-        return join(strval($operator), array_map('strval', $this->elements));
+        $operator = $this->operator ? $this->operator : new Operator(';');
+        $elementsStr =join(strval($operator), array_map('strval', $this->elements));
+
+        if($this->parent) {
+            $parentOperator = $this->parent->operator ? $this->parent->operator : new Operator(';');
+
+            if($parentOperator->isGreaterThan($operator)) {
+                return sprintf("(%s)", $elementsStr);
+            }
+        }
+
+        return $elementsStr;
     }
 }
