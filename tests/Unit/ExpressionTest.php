@@ -49,3 +49,18 @@ test('expression create nested expression', function() {
     expect($expression)->toEqual($subExpression->getParent());
     expect($subExpression)->toEqual($subSubExpression->getParent());
 })->group('expression');
+
+test('expression test to string', function() {
+    $subExpression = new Expression();
+    $subExpression->addElement(new Constraint('foo'));
+    $subExpression->addElement(new Operator(';'));
+    $subExpression->addElement(new Constraint('bar', '=gt=', '45'));
+    $expression = new Expression();
+    $expression->addElement(new Constraint('a', '==', 'wee'));
+    $expression->addElement(new Operator(','));
+    $expression->addElement($subExpression);
+    $expression->addElement(new Operator(';'));
+    $expression->addElement(new Constraint('key'));
+
+    expect(strval($expression))->toEqual('a==wee,foo;bar=gt=45;key');
+})->group('expression');

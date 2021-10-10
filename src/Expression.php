@@ -59,16 +59,14 @@ class Expression extends BaseElement {
     }
 
     public function addOperator(Operator $operator) {
-        $this->operator = $operator;
-
         if(!$this->workingFragment->operator) {
             $this->workingFragment->operator = $operator;
-        } else if ($operator->isLessThan($this->workingFragment->operator)) {
+        } else if ($operator->isGreaterThan($this->workingFragment->operator)) {
             $lastConstraint = array_pop($this->workingFragment->elements);
             $this->workingFragment = $this->workingFragment->createNestedExpression();
             $this->workingFragment->addElement($lastConstraint);
             $this->workingFragment->addOperator($operator);
-        } else if ($operator->isGreaterThan($this->workingFragment->operator)) {
+        } else if ($operator->isLessThan($this->workingFragment->operator)) {
             if ($this->workingFragment->parent) return $this->workingFragment->parent->addOperator($operator);
             return (new Expression()).addElement($this->workingFragment).addOperator($operator);
         }
