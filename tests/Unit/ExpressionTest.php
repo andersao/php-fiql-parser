@@ -1,16 +1,29 @@
 <?php
 
 use \Prettus\FIQL\Expression;
+use \Prettus\FIQL\Constraint;
+use \Prettus\FIQL\Operator;
 
-test('should construct a Expression', function() {
+test('constructor of expression', function() {
     $expression = new Expression();
     expect($expression)->toBeObject();
 });
 
-test('should return an empty array after construct', function() {
+test('expression has constraint', function() {
     $expression = new Expression();
-    $value = $expression->toArray();
+    expect($expression->hasConstraint())->toBeFalse();
 
-    expect($value)->toBeArray();
-    expect($value)->toBeEmpty();
+    $expression->addElement(new Constraint(','));
+
+    expect($expression->hasConstraint())->toBeTruthy();
+});
+
+test('expression add element', function() {
+    $expression = new Expression();
+    
+    $expression->addElement(new Constraint('foo'));
+    $expression->addElement(new Constraint('bar'));
+    $expression->addElement(new Operator(';'));
+    
+    expect(strval($expression))->toEqual('foo;bar');
 });
