@@ -2,8 +2,15 @@
 
 namespace Prettus\FIQL;
 
+/**
+ * @author Anderson Andrade <contact@andersonandra.de>
+ */
 class Utils
 {
+    /**
+     * @param $array
+     * @return array
+     */
     public static function array_flatten($array): array
     {
         if (!is_array($array)) {

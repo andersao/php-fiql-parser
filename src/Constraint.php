@@ -20,8 +20,17 @@ function isValidComparison($comparison)
     return sizeof($matches) > 0;
 }
 
+/**
+ * @author Anderson Andrade <contact@andersonandra.de>
+ */
 class Constraint extends BaseElement
 {
+    /**
+     * @param string $selector
+     * @param string $comparison
+     * @param string $argument
+     * @throws FIQLObjectException
+     */
     function __construct(string $selector, $comparison = '', $argument = '')
     {
         parent::__construct();
@@ -34,28 +43,42 @@ class Constraint extends BaseElement
         $this->argument = $argument;
     }
 
-    public function toArray()
+    /**
+     * @return array
+     */
+    public function toArray(): array
     {
         $value = COMPARISON_MAP[$this->comparison];
         return [
             $this->selector,
-            $value ? $value : $this->comparison,
+            $value ? : $this->comparison,
             $this->argument
         ];
     }
 
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString(): string
     {
         return sprintf('%s%s%s', $this->selector, $this->comparison, $this->argument);
     }
 
-    public function opOr(...$elements)
+    /**
+     * @param ...$elements
+     * @return Expression
+     */
+    public function opOr(...$elements): Expression
     {
         $expression = new Expression();
         return $expression->opOr($this, ...$elements);
     }
 
-    public function opAnd(...$elements)
+    /**
+     * @param ...$elements
+     * @return Expression
+     */
+    public function opAnd(...$elements): Expression
     {
         $expression = new Expression();
         return $expression->opAnd($this, ...$elements);

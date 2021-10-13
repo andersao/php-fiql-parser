@@ -4,11 +4,18 @@ namespace Prettus\FIQL;
 
 use \Prettus\FIQL\Exceptions\FiqlFormatException;
 
+/**
+ * @author Anderson Andrade <contact@andersonandra.de>
+ */
 class Parser
 {
-    private static function iterableParse($fiqlStr)
+    /**
+     * @param string $value
+     * @return \Generator
+     */
+    private static function iterableParse(string $value): \Generator
     {
-        $str = $fiqlStr;
+        $str = $value;
 
         while (strlen($str) > 0) {
             $matched = preg_split(Constants::CONSTRAINT_COMP, $str, -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -24,7 +31,13 @@ class Parser
         }
     }
 
-    static function FIQL($value): Expression
+    /**
+     * @param $value
+     * @return Expression
+     * @throws Exceptions\FIQLObjectException
+     * @throws FiqlFormatException
+     */
+    static function fromString($value): Expression
     {
         $nestingLevel = 0;
         $lastElement = null;

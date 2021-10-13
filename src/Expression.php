@@ -5,13 +5,34 @@ namespace Prettus\FIQL;
 use \Prettus\FIQL\Contracts\Element;
 use \Prettus\FIQL\Element as BaseElement;
 
+/**
+ * @author Anderson Andrade <contact@andersonandra.de>
+ */
 class Expression extends BaseElement
 {
-
+    /**
+     * @var array
+     */
     public $elements;
+
+    /**
+     * @var Expression
+     */
     public $workingFragment;
+
+    /**
+     * @var mixed
+     */
     public $lastElement;
 
+    /**
+     * @var Operator
+     */
+    private $operator;
+
+    /**
+     *
+     */
     function __construct()
     {
         parent::__construct();
@@ -21,19 +42,29 @@ class Expression extends BaseElement
         $this->lastElement = null;
     }
 
-    public function hasConstraint()
+    /**
+     * @return bool
+     */
+    public function hasConstraint(): bool
     {
         return sizeof($this->elements) > 0;
     }
 
-    public function createNestedExpression()
+    /**
+     * @return Expression
+     */
+    public function createNestedExpression(): Expression
     {
         $sub = new Expression();
         $this->addElement($sub);
         return $sub;
     }
 
-    public function opAnd(...$elements)
+    /**
+     * @param ...$elements
+     * @return Expression
+     */
+    public function opAnd(...$elements): Expression
     {
         $expression = $this->addOperator(new Operator(';'));
 
@@ -44,7 +75,11 @@ class Expression extends BaseElement
         return $expression;
     }
 
-    public function opOr(...$elements)
+    /**
+     * @param ...$elements
+     * @return Expression
+     */
+    public function opOr(...$elements): Expression
     {
         $expression = $this->addOperator(new Operator(','));
 
@@ -55,7 +90,11 @@ class Expression extends BaseElement
         return $expression;
     }
 
-    public function addElement($element)
+    /**
+     * @param $element
+     * @return Expression
+     */
+    public function addElement($element): Expression
     {
         if ($element instanceof Element) {
             $element->setParent($this);
@@ -66,7 +105,11 @@ class Expression extends BaseElement
         }
     }
 
-    public function addOperator(Operator $operator)
+    /**
+     * @param Operator $operator
+     * @return $this|Expression
+     */
+    public function addOperator(Operator $operator): Expression
     {
         if (!$this->workingFragment->operator) {
             $this->workingFragment->operator = $operator;
@@ -83,14 +126,17 @@ class Expression extends BaseElement
         return $this;
     }
 
-    public function toArray()
+    /**
+     * @return array
+     */
+    public function toArray(): array
     {
         $countElements = sizeof($this->elements);
 
-        if ($countElements == 0) return null;
+        if ($countElements == 0) return [];
         if ($countElements == 1) return $this->elements[0]->toArray();
 
-        $operator = $this->operator ? $this->operator : new Operator(';');
+        $operator = $this->operator ? : new Operator(';');
 
         return [
             $operator->toArray() => array_map(function ($el) {
@@ -99,6 +145,9 @@ class Expression extends BaseElement
         ];
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         $operator = $this->operator ?: new Operator(';');

@@ -9,32 +9,52 @@ const OPERATOR_MAP = [
     ',' => ['or', 1],
 ];
 
+/**
+ * @author Anderson Andrade <contact@andersonandra.de>
+ */
 class Operator
 {
     private $value;
 
+    /**
+     * @param string|null $value
+     * @throws FIQLObjectException
+     */
     function __construct(string $value = null)
     {
         if (!$value || !OPERATOR_MAP[$value]) throw new FIQLObjectException("$value is not a valid FIQL operator");
         $this->value = $value;
     }
 
+    /**
+     * @return string
+     */
     public function getValue(): string
     {
         return $this->value;
     }
 
-    public function getPriority(): string
+    /**
+     * @return int
+     */
+    public function getPriority(): int
     {
         return OPERATOR_MAP[$this->getValue()][1];
     }
 
+    /**
+     * @return string
+     */
     public function getCondition(): string
     {
         return OPERATOR_MAP[$this->getValue()][0];
     }
 
-    public function compare(Operator $other)
+    /**
+     * @param Operator $other
+     * @return int
+     */
+    public function compare(Operator $other): int
     {
         $precSelf = $this->getPriority();
         $precOther = $other->getPriority();
@@ -45,21 +65,35 @@ class Operator
         return 0;
     }
 
-    public function isGreaterThan(Operator $operator)
+    /**
+     * @param Operator $operator
+     * @return bool
+     */
+    public function isGreaterThan(Operator $operator): bool
     {
         return $this->compare($operator) > 0;
     }
 
-    public function isLessThan(Operator $operator)
+    /**
+     * @param Operator $operator
+     * @return bool
+     */
+    public function isLessThan(Operator $operator): bool
     {
         return $this->compare($operator) < 0;
     }
 
-    public function toArray()
+    /**
+     * @return string
+     */
+    public function toArray(): string
     {
         return $this->getCondition();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->value;

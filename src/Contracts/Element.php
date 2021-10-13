@@ -2,6 +2,9 @@
 
 namespace Prettus\FIQL\Contracts;
 
+/**
+ * @author Anderson Andrade <contact@andersonandra.de>
+ */
 interface Element
 {
     public function setParent(Element $element);

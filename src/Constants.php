@@ -2,6 +2,9 @@
 
 namespace Prettus\FIQL;
 
+/**
+ * @author Anderson Andrade <contact@andersonandra.de>
+ */
 class Constants
 {
     const PCT_ENCODING_REGEX = '%[A-Fa-f0-9]{2}';

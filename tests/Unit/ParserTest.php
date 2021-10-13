@@ -6,7 +6,7 @@ use \Prettus\FIQL\Exceptions\FiqlException;
 
 
 test('parse str to expression constraint only', function($fiqlStr, $expectedArray = []) {
-    $expression = Parser::FIQL($fiqlStr);
+    $expression = Parser::fromString($fiqlStr);
 
     expect($expression)->toBeInstanceOf(Expression::class);
     expect(strval($expression))->toEqual($fiqlStr);
@@ -19,7 +19,7 @@ test('parse str to expression constraint only', function($fiqlStr, $expectedArra
 ])->group('parser');
 
 test('parse str to expression no args', function($fiqlStr, $expectedStr, $expectedArray = []) {
-    $expression = Parser::FIQL($fiqlStr);
+    $expression = Parser::fromString($fiqlStr);
 
     expect($expression)->toBeInstanceOf(Expression::class);
     expect(strval($expression))->toEqual($expectedStr);
@@ -30,7 +30,7 @@ test('parse str to expression no args', function($fiqlStr, $expectedStr, $expect
 ])->group('parser');
 
 test('parse str to expression one operation', function($fiqlStr, $expectedArray = []) {
-    $expression = Parser::FIQL($fiqlStr);
+    $expression = Parser::fromString($fiqlStr);
 
     expect($expression)->toBeInstanceOf(Expression::class);
     expect(strval($expression))->toEqual($fiqlStr);
@@ -65,7 +65,7 @@ test('parse str to expression one operation', function($fiqlStr, $expectedArray 
 ])->group('parser');
 
 test('parse str to expression explicit nesting', function($fiqlStr, $expectedStr, $expectedArray = []) {
-    $expression = Parser::FIQL($fiqlStr);
+    $expression = Parser::fromString($fiqlStr);
     expect($expression)->toBeInstanceOf(Expression::class);
     expect(strval($expression))->toEqual($expectedStr);
     expect($expression->toArray())->toEqual($expectedArray);
@@ -82,7 +82,7 @@ test('parse str to expression explicit nesting', function($fiqlStr, $expectedStr
 ])->group('parser');
 
 test('parse str to expression implicit nesting', function($fiqlStr, $expectedArray = []) {
-    $expression = Parser::FIQL($fiqlStr);
+    $expression = Parser::fromString($fiqlStr);
     expect($expression)->toBeInstanceOf(Expression::class);
     expect(strval($expression))->toEqual($fiqlStr);
     expect($expression->toArray())->toEqual($expectedArray);
@@ -99,7 +99,7 @@ test('parse str to expression implicit nesting', function($fiqlStr, $expectedArr
 ])->group('parser');
 
 test('parse str to expression failure', function($str) {
-    $expression = Parser::FIQL($str);
+    $expression = Parser::fromString($str);
 })->with([
     'foo=bar',
     'foo==',
