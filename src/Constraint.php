@@ -6,6 +6,15 @@ use \Prettus\FIQL\Contracts\Element;
 use \Prettus\FIQL\Expression;
 use \Prettus\FIQL\Element as BaseElement;
 
+const COMPARISON_MAP = [
+    '==' => '==',
+    '!=' => '!=',
+    '=gt=' => '>',
+    '=ge=' => '>=',
+    '=lt=' => '<',
+    '=le=' => '<=',
+];
+
 class Constraint extends BaseElement {
     function __construct(string $selector, string $comparison='', string $argument='') {
  
