@@ -66,9 +66,6 @@ test('parse str to expression one operation', function($fiqlStr, $expectedArray 
 
 test('parse str to expression explicit nesting', function($fiqlStr, $expectedStr, $expectedArray = []) {
     $expression = Parser::FIQL($fiqlStr);
-
-    print_r($expression->toArray());
-
     expect($expression)->toBeInstanceOf(Expression::class);
     expect(strval($expression))->toEqual($expectedStr);
     expect($expression->toArray())->toEqual($expectedArray);
