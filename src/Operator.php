@@ -1,4 +1,5 @@
 <?php
+
 namespace Prettus\FIQL;
 
 use \Prettus\FIQL\Exceptions\FIQLObjectException;
@@ -8,27 +9,33 @@ const OPERATOR_MAP = [
     ',' => ['or', 1],
 ];
 
-class Operator {
+class Operator
+{
     private $value;
 
-    function __construct(string $value = null) {
-        if(!$value || !OPERATOR_MAP[$value]) throw new FIQLObjectException("$value is not a valid FIQL operator");
+    function __construct(string $value = null)
+    {
+        if (!$value || !OPERATOR_MAP[$value]) throw new FIQLObjectException("$value is not a valid FIQL operator");
         $this->value = $value;
     }
 
-    public function getValue(): string {
+    public function getValue(): string
+    {
         return $this->value;
     }
 
-    public function getPriority(): string {
+    public function getPriority(): string
+    {
         return OPERATOR_MAP[$this->getValue()][1];
     }
 
-    public function getCondition(): string {
+    public function getCondition(): string
+    {
         return OPERATOR_MAP[$this->getValue()][0];
     }
 
-    public function compare(Operator $other) {
+    public function compare(Operator $other)
+    {
         $precSelf = $this->getPriority();
         $precOther = $other->getPriority();
 
@@ -38,19 +45,23 @@ class Operator {
         return 0;
     }
 
-    public function isGreaterThan(Operator $operator) {
+    public function isGreaterThan(Operator $operator)
+    {
         return $this->compare($operator) > 0;
     }
 
-    public function isLessThan(Operator $operator) {
+    public function isLessThan(Operator $operator)
+    {
         return $this->compare($operator) < 0;
     }
 
-    public function toArray(){
+    public function toArray()
+    {
         return $this->getCondition();
     }
 
-    public function __toString(){
+    public function __toString()
+    {
         return $this->value;
     }
 }
