@@ -23,7 +23,7 @@ $regexMatch = function ($regx, $str, $mode = PREG_SET_ORDER) {
 };
 
 $constraintRegex = function ($str) use($regexMatch) {
-    return array_flatten($regexMatch('/'.Constants::CONSTRAINT_REGEX.'/', $str));
+    return array_flatten($regexMatch('/'.Constants::CONSTRAINT_REGEX.'(.*)/', $str));
 };
 
 $pctEncodingRegex = function ($str) use($regexMatch) {
