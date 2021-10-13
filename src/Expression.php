@@ -74,6 +74,21 @@ class Expression extends BaseElement {
         return $this;
     }
 
+    public function toArray() {
+        $countElements = sizeof($this->elements);
+
+        if($countElements == 0) return null;
+        if($countElements == 1) return $this->elements[0].toArray();
+
+        $operator = $this->operator ? $this->operator : new Operator(';');
+
+        return [
+            $operator->toArray() => array_map(function ($el) {
+                return $el->toArray();
+            }, $this->elements)
+        ];
+    }
+
     public function __toString() {
         $operator = $this->operator ? $this->operator : new Operator(';');
         $elementsStr =join(strval($operator), array_map('strval', $this->elements));

@@ -10,4 +10,5 @@ class Constants {
     const ARG_CHAR_REGEX = '(' . self::UNRESERVED_REGEX . '|' . self::PCT_ENCODING_REGEX . '|' . self::FIQL_DELIM_REGEX . '|' . '=|:)';
     const ARGUMENT_REGEX = self::ARG_CHAR_REGEX . '+';
     const CONSTRAINT_REGEX = '(' . self::SELECTOR_REGEX . ')((' . self::COMPARISON_REGEX . ')' . '(' . self::ARGUMENT_REGEX . '))?(.*)';
+    const COMPARISON_COMP = '/^' . self::COMPARISON_REGEX .'$/';
 }

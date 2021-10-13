@@ -10,7 +10,7 @@ test('should init a Constraint', function() {
     expect($constraint->comparison)->toEqual('==');
     expect($constraint->argument)->toEqual('bar');
     expect(strval($constraint))->toEqual('foo==bar');
-});
+})->group('constraint');
 
 test('should init a Constraint with default values', function() {
     $constraint = new Constraint('foo');
@@ -18,18 +18,18 @@ test('should init a Constraint with default values', function() {
     expect($constraint->comparison)->toBeEmpty();
     expect($constraint->argument)->toBeEmpty();
     expect(strval($constraint))->toEqual('foo');
-});
+})->group('constraint');
 
 test('should throw an erro if invalid comparison', function($comparison) {
     new Constraint('foo', $comparison, 'bar');
-})->with(['=gt'])->throws(FIQLObjectException::class);
+})->with(['=gt', '=lt', '='])->throws(FIQLObjectException::class)->group('constraint');
 
 test('constraint set parent', function() {
     $constraint = new Constraint('foo');
     $expression = new Expression();
     $constraint->setParent($expression);
     expect($constraint->getParent())->toEqual($expression);
-});
+})->group('constraint');
 
 test('constraint fluent', function() {
     $constraint = (new Constraint('foo', '==', 'bar'))->opOr(
