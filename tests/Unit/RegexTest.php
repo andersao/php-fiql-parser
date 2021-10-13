@@ -103,12 +103,12 @@ test('constraint regex', function ($value, $expected) use($constraintRegex) {
     expect($matches)->toBeArray();
     expect($matches)->toEqual($expected);
 })->with([
-    ['foo==bar', ['foo==bar','foo','o','==bar','==','=','bar','r', '']],
-    ['foo=gt=bar', ['foo=gt=bar', 'foo', 'o', '=gt=bar', '=gt=', '=gt', 'bar', 'r', '']],
-    ['foo=le=bar', ['foo=le=bar', 'foo', 'o', '=le=bar', '=le=', '=le', 'bar', 'r', '']],
-    ['foo!=bar', ['foo!=bar', 'foo', 'o', '!=bar', '!=', '!', 'bar', 'r', '']],
-    ['foo=bar', ['foo=bar', 'foo', 'o', '', '', '', '', '', '=bar']],
-    ['foo==', ['foo==', 'foo', 'o', '', '', '', '', '', '==']],
-    ['foo=', ['foo=', 'foo', 'o', '', '', '', '', '', '=']],
-    ['foo', ['foo', 'foo', 'o', '', '', '', '', '', '']],
+    ['foo==bar', ['foo==bar','foo','o','==bar','==','=','bar','r', '', '']],
+    ['foo=gt=bar', ['foo=gt=bar', 'foo', 'o', '=gt=bar', '=gt=', '=gt', 'bar', 'r', '', '']],
+    ['foo=le=bar', ['foo=le=bar', 'foo', 'o', '=le=bar', '=le=', '=le', 'bar', 'r', '', '']],
+    ['foo!=bar', ['foo!=bar', 'foo', 'o', '!=bar', '!=', '!', 'bar', 'r', '', '']],
+    ['foo=bar', ['foo=bar', 'foo', 'o', '', '', '', '', '', '', '=bar']],
+    ['foo==', ['foo==', 'foo', 'o', '', '', '', '', '', '', '==']],
+    ['foo=', ['foo=', 'foo', 'o', '', '', '', '', '', '', '=']],
+    ['foo', ['foo', 'foo', 'o', '', '', '', '', '', '', '']],
 ])->group('regex');

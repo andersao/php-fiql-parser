@@ -78,7 +78,7 @@ class Expression extends BaseElement {
         $countElements = sizeof($this->elements);
 
         if($countElements == 0) return null;
-        if($countElements == 1) return $this->elements[0].toArray();
+        if($countElements == 1) return $this->elements[0]->toArray();
 
         $operator = $this->operator ? $this->operator : new Operator(';');
 
