@@ -2,37 +2,52 @@
 
 use \Prettus\FIQL\Constants;
 
-$regexMatch = function ($regx, $str, $mode = PREG_PATTERN_ORDER) {
+function array_flatten($array) { 
+    if (!is_array($array)) { 
+        return false; 
+    } 
+    $result = array(); 
+    foreach ($array as $key => $value) { 
+        if (is_array($value)) { 
+        $result = array_merge($result, array_flatten($value)); 
+        } else { 
+        $result = array_merge($result, array($key => $value));
+        } 
+    } 
+    return $result; 
+}
+
+$regexMatch = function ($regx, $str, $mode = PREG_SET_ORDER) {
     preg_match_all($regx, $str, $matches, $mode);
     return $matches;
 };
 
 $constraintRegex = function ($str) use($regexMatch) {
-    return $regexMatch(Constants::CONSTRAINT_REGEX, $str);
+    return array_flatten($regexMatch('/'.Constants::CONSTRAINT_REGEX.'/', $str));
 };
 
 $pctEncodingRegex = function ($str) use($regexMatch) {
-    return $regexMatch('/'.Constants::PCT_ENCODING_REGEX.'$/', $str, PREG_SET_ORDER);
+    return $regexMatch('/'.Constants::PCT_ENCODING_REGEX.'$/', $str);
 };
 
 $unreservedRegex = function ($str) use($regexMatch) {
-    return $regexMatch('/'.Constants::UNRESERVED_REGEX.'+$/', $str, PREG_SET_ORDER);
+    return $regexMatch('/'.Constants::UNRESERVED_REGEX.'+$/', $str);
 };
 
 $delimitRegex = function ($str) use($regexMatch) {
-    return $regexMatch('/'.Constants::FIQL_DELIM_REGEX.'+$/', $str, PREG_SET_ORDER);
+    return $regexMatch('/'.Constants::FIQL_DELIM_REGEX.'+$/', $str);
 };
 
 $selectorRegex = function ($str) use($regexMatch) {
-    return $regexMatch('/'.Constants::SELECTOR_REGEX.'$/', $str, PREG_SET_ORDER);
+    return $regexMatch('/'.Constants::SELECTOR_REGEX.'$/', $str);
 };
 
 $comparisonRegex = function ($str) use($regexMatch) {
-    return $regexMatch('/'.Constants::COMPARISON_REGEX.'$/', $str, PREG_SET_ORDER);
+    return $regexMatch('/'.Constants::COMPARISON_REGEX.'$/', $str);
 };
 
 $argumentRegex = function ($str) use($regexMatch) {
-    return $regexMatch('/'.Constants::ARGUMENT_REGEX.'$/', $str, PREG_SET_ORDER);
+    return $regexMatch('/'.Constants::ARGUMENT_REGEX.'$/', $str);
 };
 
 test('pct encoding not empty', function ($value) use($pctEncodingRegex) {
@@ -82,3 +97,18 @@ test('comparison is empty', function ($value) use($comparisonRegex) {
 test('comparison is not empty', function ($value) use($comparisonRegex) {
     expect($comparisonRegex($value))->not->toBeEmpty();
 })->with(["=gt=","=ge=","=lt=","=le=","!=","$=","'=","*=","+=","=="])->group('regex');
+
+test('constraint regex', function ($value, $expected) use($constraintRegex) {
+    $matches = $constraintRegex($value);
+    expect($matches)->toBeArray();
+    expect($matches)->toEqual($expected);
+})->with([
+    ['foo==bar', ['foo==bar','foo','o','==bar','==','=','bar','r', '']],
+    ['foo=gt=bar', ['foo=gt=bar', 'foo', 'o', '=gt=bar', '=gt=', '=gt', 'bar', 'r', '']],
+    ['foo=le=bar', ['foo=le=bar', 'foo', 'o', '=le=bar', '=le=', '=le', 'bar', 'r', '']],
+    ['foo!=bar', ['foo!=bar', 'foo', 'o', '!=bar', '!=', '!', 'bar', 'r', '']],
+    ['foo=bar', ['foo=bar', 'foo', 'o', '', '', '', '', '', '=bar']],
+    ['foo==', ['foo==', 'foo', 'o', '', '', '', '', '', '==']],
+    ['foo=', ['foo=', 'foo', 'o', '', '', '', '', '', '=']],
+    ['foo', ['foo', 'foo', 'o', '', '', '', '', '', '']],
+])->group('regex');
