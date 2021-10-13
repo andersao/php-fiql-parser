@@ -6,6 +6,7 @@ use \Prettus\FIQL\Constraint;
 use \Prettus\FIQL\Expression;
 use \Prettus\FIQL\Operator;
 use \Prettus\FIQL\Utils;
+use \Prettus\FIQL\Exceptions\FiqlFormatException;
 
 class Parser {
     private static function iterableParse($fiqlStr) {
@@ -36,7 +37,10 @@ class Parser {
             if($preamble) {
                 foreach(str_split($preamble) as $char) {
                     if($char == '(') {
-                        if($lastElement instanceof Element) throw new Error('query format error');
+                        if($lastElement instanceof Element) {
+                            throw new FiqlFormatException(sprintf('%s can not be followed by %s', get_class($lastElement), Expression::class));
+                        }
+
                         $expression = $expression->createNestedExpression();
                         $nestingLevel += 1;
                     }elseif($char == ')') {
@@ -44,8 +48,13 @@ class Parser {
                         $lastElement = $expression;
                         $nestingLevel -= 1;
                     }else{
-                        if(!$expression->hasConstraint()) throw new Error('proceeding initial');
-                        if($lastElement instanceof Operator) throw new Error('can not be followed by');
+                        if(!$expression->hasConstraint()) {
+                            throw new FiqlFormatException(sprintf('%s proceeding initial %s', Operator::class, Constraint::class));
+                        }
+
+                        if($lastElement instanceof Operator) {
+                            throw new FiqlFormatException(sprintf('%s can not be followed by %s', Operator::class, Operator::class));
+                        }
 
                         $lastElement = new Operator($char);
                         $expression = $expression->addOperator($lastElement);
@@ -54,18 +63,20 @@ class Parser {
             }
 
             if($selector) {
-                if($lastElement instanceof Element) throw new Error('can not be followed by');
+                if($lastElement instanceof Element) {
+                    throw new FiqlFormatException(sprintf('%s can not be followed by %s', get_class($lastElement), Constraint::class));
+                }
                 $lastElement = new Constraint($selector, $comparison, $argument);
                 $expression->addElement($lastElement);
             }
         }
 
         if($nestingLevel != 0) {
-            throw new Error('At least one nested expression was not correctly closed');
+            throw new FiqlFormatException('At least one nested expression was not correctly closed');
         }
 
         if(!$expression->hasConstraint()) {
-            throw new Error('contained no constraint');
+            throw new FiqlFormatException(sprintf("Parsed string '%s' contained no constraint", $value));
         }
 
         return $expression;

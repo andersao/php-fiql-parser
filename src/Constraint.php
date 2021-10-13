@@ -22,7 +22,7 @@ function isValidComparison($comparison) {
 }
 
 class Constraint extends BaseElement {
-    function __construct(string $selector, string $comparison='', string $argument='') {
+    function __construct(string $selector, $comparison='', $argument='') {
 
         if($comparison and !isValidComparison($comparison)) {
             throw new FIQLObjectException(sprintf("'%s' is not a valid FIQL comparison", $comparison));
