@@ -5,6 +5,7 @@ use \Prettus\FIQL\Constants;
 use \Prettus\FIQL\Constraint;
 use \Prettus\FIQL\Expression;
 use \Prettus\FIQL\Operator;
+use \Prettus\FIQL\Utils;
 
 class Parser {
     private static function iterableParse($fiqlStr) {
@@ -14,11 +15,11 @@ class Parser {
             $matched = preg_split(Constants::CONSTRAINT_COMP, $str, -1, PREG_SPLIT_DELIM_CAPTURE);
 
             if(sizeof($matched) < 2) {
-                yield [$matched, null, null, null];
+                yield Utils::array_flatten([$matched[0], null, null, null]);
                 break;
             }
 
-            yield [$matched[0], $matched[1], $matched[4], $matched[6] ? $matched[6] : null];
+            yield Utils::array_flatten([$matched[0], $matched[1], $matched[4], $matched[6] ? $matched[6] : null]);
 
             $str = $matched[9];
         }
