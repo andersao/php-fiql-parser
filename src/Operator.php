@@ -22,7 +22,7 @@ class Operator
      */
     function __construct(string $value = null)
     {
-        if (!$value || !OPERATOR_MAP[$value]) throw new FIQLObjectException("$value is not a valid FIQL operator");
+        if (!$value || !array_key_exists($value, OPERATOR_MAP)) throw new FIQLObjectException("$value is not a valid FIQL operator");
         $this->value = $value;
     }
 

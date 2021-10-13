@@ -48,7 +48,7 @@ class Constraint extends BaseElement
      */
     public function toArray(): array
     {
-        $value = COMPARISON_MAP[$this->comparison];
+        $value = array_key_exists($this->comparison, COMPARISON_MAP) ? COMPARISON_MAP[$this->comparison] : null;
         return [
             $this->selector,
             $value ? : $this->comparison,

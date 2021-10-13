@@ -12,7 +12,8 @@
   },
   "scripts": {
     "test": "pest",
-    "test:unit": "@test --watch"
+    "test:unit": "@test --watch",
+    "test:ci": "@test --ci --coverage"
   },
   "authors": [
     {
