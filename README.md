@@ -67,7 +67,7 @@ $subExpression->addElement(new Constraint('age', '=gt=', '5'));
 $expression->addElement($subExpression);
 
 print_r(strval($expression));
-// last_name==foo*,(age=lt=55;age=gt=5)
+// last_name==foo*,age=lt=55;age=gt=5
 ```
 
 ## Credits
