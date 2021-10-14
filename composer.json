@@ -16,7 +16,8 @@
     "test": "pest",
     "test:unit": "@test --watch",
     "test:ci": "@test --ci",
-    "test:coverage": "@test --ci --coverage --coverage-clover coverage.clover"
+    "test:coverage": "@test --ci --coverage --coverage-clover coverage.clover",
+    "fixer": "php-cs-fixer fix ./src"
   },
   "authors": [
     {
@@ -39,7 +40,8 @@
   },
   "require-dev": {
     "pestphp/pest": "^1.20",
-    "pestphp/pest-plugin-watch": "dev-master"
+    "pestphp/pest-plugin-watch": "dev-master",
+    "friendsofphp/php-cs-fixer": "^3.2"
   },
   "minimum-stability": "stable"
 }

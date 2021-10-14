@@ -2,7 +2,7 @@
 
 namespace Prettus\FIQLParser;
 
-use \Prettus\FIQLParser\Contracts\Element as ElementInterface;
+use Prettus\FIQLParser\Contracts\Element as ElementInterface;
 
 /**
  * @author Anderson Andrade <contact@andersonandra.de>
@@ -14,7 +14,7 @@ abstract class Element implements ElementInterface
      */
     private $parent;
 
-    function __construct()
+    public function __construct()
     {
         $this->parent = null;
     }

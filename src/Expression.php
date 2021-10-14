@@ -3,9 +3,9 @@
 namespace Prettus\FIQLParser;
 
 use Prettus\FIQLParser\Contracts\Arrayable;
-use \Prettus\FIQLParser\Contracts\Element;
+use Prettus\FIQLParser\Contracts\Element;
 use Prettus\FIQLParser\Contracts\Jsonable;
-use \Prettus\FIQLParser\Element as BaseElement;
+use Prettus\FIQLParser\Element as BaseElement;
 
 /**
  * @author Anderson Andrade <contact@andersonandra.de>
@@ -35,7 +35,7 @@ class Expression extends BaseElement implements \Stringable, Arrayable, Jsonable
     /**
      *
      */
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->elements = [];
@@ -115,13 +115,15 @@ class Expression extends BaseElement implements \Stringable, Arrayable, Jsonable
     {
         if (!$this->workingFragment->operator) {
             $this->workingFragment->operator = $operator;
-        } else if ($operator->isGreaterThan($this->workingFragment->operator)) {
+        } elseif ($operator->isGreaterThan($this->workingFragment->operator)) {
             $lastConstraint = array_pop($this->workingFragment->elements);
             $this->workingFragment = $this->workingFragment->createNestedExpression();
             $this->workingFragment->addElement($lastConstraint);
             $this->workingFragment->addOperator($operator);
-        } else if ($operator->isLessThan($this->workingFragment->operator)) {
-            if ($this->workingFragment->hasParent()) return $this->workingFragment->getParent()->addOperator($operator);
+        } elseif ($operator->isLessThan($this->workingFragment->operator)) {
+            if ($this->workingFragment->hasParent()) {
+                return $this->workingFragment->getParent()->addOperator($operator);
+            }
             return (new Expression())->addElement($this->workingFragment)->addOperator($operator);
         }
 
@@ -135,10 +137,14 @@ class Expression extends BaseElement implements \Stringable, Arrayable, Jsonable
     {
         $countElements = sizeof($this->elements);
 
-        if ($countElements == 0) return [];
-        if ($countElements == 1) return $this->elements[0]->toArray();
+        if ($countElements == 0) {
+            return [];
+        }
+        if ($countElements == 1) {
+            return $this->elements[0]->toArray();
+        }
 
-        $operator = $this->operator ? : new Operator(';');
+        $operator = $this->operator ?: new Operator(';');
 
         return [
             $operator->toArray() => array_map(function ($el) {

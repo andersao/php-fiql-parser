@@ -4,7 +4,7 @@ namespace Prettus\FIQLParser;
 
 use Prettus\FIQLParser\Contracts\Arrayable;
 use Prettus\FIQLParser\Contracts\Jsonable;
-use \Prettus\FIQLParser\Exceptions\FIQLObjectException;
+use Prettus\FIQLParser\Exceptions\FIQLObjectException;
 
 const OPERATOR_MAP = [
     ';' => ['and', 2],
@@ -22,9 +22,11 @@ class Operator implements \Stringable, Arrayable, Jsonable
      * @param string|null $value
      * @throws FIQLObjectException
      */
-    function __construct(string $value = null)
+    public function __construct(string $value = null)
     {
-        if (!$value || !array_key_exists($value, OPERATOR_MAP)) throw new FIQLObjectException("$value is not a valid FIQL operator");
+        if (!$value || !array_key_exists($value, OPERATOR_MAP)) {
+            throw new FIQLObjectException("$value is not a valid FIQL operator");
+        }
         $this->value = $value;
     }
 
@@ -61,8 +63,12 @@ class Operator implements \Stringable, Arrayable, Jsonable
         $precSelf = $this->getPriority();
         $precOther = $other->getPriority();
 
-        if ($precSelf < $precOther) return -1;
-        if ($precSelf > $precOther) return 1;
+        if ($precSelf < $precOther) {
+            return -1;
+        }
+        if ($precSelf > $precOther) {
+            return 1;
+        }
 
         return 0;
     }

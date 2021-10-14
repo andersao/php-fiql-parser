@@ -5,7 +5,8 @@ namespace Prettus\FIQLParser\Contracts;
 /**
  * @author Anderson Andrade <contact@andersonandra.de>
  */
-interface Arrayable {
+interface Arrayable
+{
     /**
      * @return mixed
      */

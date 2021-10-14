@@ -4,8 +4,8 @@ namespace Prettus\FIQLParser;
 
 use Prettus\FIQLParser\Contracts\Arrayable;
 use Prettus\FIQLParser\Contracts\Jsonable;
-use \Prettus\FIQLParser\Exceptions\FIQLObjectException;
-use \Prettus\FIQLParser\Element as BaseElement;
+use Prettus\FIQLParser\Exceptions\FIQLObjectException;
+use Prettus\FIQLParser\Element as BaseElement;
 
 const COMPARISON_MAP = [
     '==' => '==',
@@ -33,7 +33,7 @@ class Constraint extends BaseElement implements \Stringable, Arrayable, Jsonable
      * @param string $argument
      * @throws FIQLObjectException
      */
-    function __construct(string $selector, $comparison = '', $argument = '')
+    public function __construct(string $selector, $comparison = '', $argument = '')
     {
         parent::__construct();
         if ($comparison and !isValidComparison($comparison)) {
@@ -53,7 +53,7 @@ class Constraint extends BaseElement implements \Stringable, Arrayable, Jsonable
         $value = array_key_exists($this->comparison, COMPARISON_MAP) ? COMPARISON_MAP[$this->comparison] : null;
         return [
             $this->selector,
-            $value ? : $this->comparison,
+            $value ?: $this->comparison,
             $this->argument
         ];
     }

@@ -2,7 +2,7 @@
 
 namespace Prettus\FIQLParser;
 
-use \Prettus\FIQLParser\Exceptions\FiqlFormatException;
+use Prettus\FIQLParser\Exceptions\FiqlFormatException;
 
 /**
  * @author Anderson Andrade <contact@andersonandra.de>
@@ -37,7 +37,7 @@ class Parser
      * @throws Exceptions\FIQLObjectException
      * @throws FiqlFormatException
      */
-    static function fromString($value): Expression
+    public static function fromString($value): Expression
     {
         $nestingLevel = 0;
         $lastElement = null;
