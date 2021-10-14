@@ -98,6 +98,15 @@ test('parse str to expression implicit nesting', function($fiqlStr, $expectedArr
     ]],
 ])->group('parser');
 
+test('parse str to expression and convert json', function($fiqlStr, $expectedJson) {
+    $expression = Parser::fromString($fiqlStr);
+    expect($expression)->toBeInstanceOf(Expression::class);
+    expect(strval($expression))->toEqual($fiqlStr);
+    expect($expression->toJson())->toEqual($expectedJson);
+})->with([
+    ['foo==bar,goo=gt=5;goo=lt=10', '{"or":[["foo","==","bar"],{"and":[["goo",">","5"],["goo","<","10"]]}]}'],
+])->group('parser');
+
 test('parse str to expression failure', function($str) {
     $expression = Parser::fromString($str);
 })->with([
