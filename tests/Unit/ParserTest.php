@@ -4,7 +4,6 @@ use \Prettus\FIQLParser\Parser;
 use \Prettus\FIQLParser\Expression;
 use \Prettus\FIQLParser\Exceptions\FiqlException;
 
-
 test('parse str to expression constraint only', function($fiqlStr, $expectedArray = []) {
     $expression = Parser::fromString($fiqlStr);
 
