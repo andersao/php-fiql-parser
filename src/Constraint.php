@@ -2,6 +2,8 @@
 
 namespace Prettus\FIQLParser;
 
+use Prettus\FIQLParser\Contracts\Arrayable;
+use Prettus\FIQLParser\Contracts\Jsonable;
 use \Prettus\FIQLParser\Exceptions\FIQLObjectException;
 use \Prettus\FIQLParser\Element as BaseElement;
 
@@ -23,7 +25,7 @@ function isValidComparison($comparison)
 /**
  * @author Anderson Andrade <contact@andersonandra.de>
  */
-class Constraint extends BaseElement
+class Constraint extends BaseElement implements \Stringable, Arrayable, Jsonable
 {
     /**
      * @param string $selector
@@ -54,6 +56,15 @@ class Constraint extends BaseElement
             $value ? : $this->comparison,
             $this->argument
         ];
+    }
+
+    /**
+     * @param int $options
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->toArray(), $options);
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace Prettus\FIQLParser;
 
+use Prettus\FIQLParser\Contracts\Arrayable;
+use Prettus\FIQLParser\Contracts\Jsonable;
 use \Prettus\FIQLParser\Exceptions\FIQLObjectException;
 
 const OPERATOR_MAP = [
@@ -12,7 +14,7 @@ const OPERATOR_MAP = [
 /**
  * @author Anderson Andrade <contact@andersonandra.de>
  */
-class Operator
+class Operator implements \Stringable, Arrayable, Jsonable
 {
     private $value;
 
@@ -97,5 +99,14 @@ class Operator
     public function __toString()
     {
         return $this->value;
+    }
+
+    /**
+     * @param int $options
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->toArray(), $options);
     }
 }

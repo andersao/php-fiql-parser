@@ -2,13 +2,15 @@
 
 namespace Prettus\FIQLParser;
 
+use Prettus\FIQLParser\Contracts\Arrayable;
 use \Prettus\FIQLParser\Contracts\Element;
+use Prettus\FIQLParser\Contracts\Jsonable;
 use \Prettus\FIQLParser\Element as BaseElement;
 
 /**
  * @author Anderson Andrade <contact@andersonandra.de>
  */
-class Expression extends BaseElement
+class Expression extends BaseElement implements \Stringable, Arrayable, Jsonable
 {
     /**
      * @var array
@@ -143,6 +145,15 @@ class Expression extends BaseElement
                 return $el->toArray();
             }, $this->elements)
         ];
+    }
+
+    /**
+     * @param int $options
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->toArray(), $options);
     }
 
     /**
