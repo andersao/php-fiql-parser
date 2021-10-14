@@ -30,13 +30,14 @@
   "homepage": "https://github.com/andersao/php-fiql-parser",
   "support": {
     "email": "contato@andersonandra.de",
-    "issues":"https://github.com/andersao/php-fiql-parser/issues",
-    "wiki":"https://github.com/andersao/php-fiql-parser",
-    "source":"https://github.com/andersao/php-fiql-parser",
+    "issues": "https://github.com/andersao/php-fiql-parser/issues",
+    "wiki": "https://github.com/andersao/php-fiql-parser",
+    "source": "https://github.com/andersao/php-fiql-parser",
     "docs": "https://github.com/andersao/php-fiql-parser"
   },
   "config": {
-    "preferred-install": "dist"
+    "preferred-install": "dist",
+    "sort-packages": true
   },
   "require-dev": {
     "pestphp/pest": "^1.20",
