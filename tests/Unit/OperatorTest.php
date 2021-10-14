@@ -1,7 +1,7 @@
 <?php
 
-use \Prettus\FIQL\Operator;
-use \Prettus\FIQL\Exceptions\FIQLObjectException;
+use \Prettus\FIQLParser\Operator;
+use \Prettus\FIQLParser\Exceptions\FIQLObjectException;
 
 
 test('should throws exception if pass invalid operator', function($op) {

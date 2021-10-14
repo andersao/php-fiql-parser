@@ -1,6 +1,6 @@
 <?php
 
-namespace Prettus\FIQL\Exceptions;
+namespace Prettus\FIQLParser\Exceptions;
 
 /**
  * @author Anderson Andrade <contact@andersonandra.de>

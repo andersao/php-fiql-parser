@@ -7,7 +7,7 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Prettus\\FIQL\\": "src/"
+      "Prettus\\FIQLParser\\": "src/"
     }
   },
   "scripts": {

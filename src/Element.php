@@ -1,8 +1,8 @@
 <?php
 
-namespace Prettus\FIQL;
+namespace Prettus\FIQLParser;
 
-use \Prettus\FIQL\Contracts\Element as ElementInterface;
+use \Prettus\FIQLParser\Contracts\Element as ElementInterface;
 
 /**
  * @author Anderson Andrade <contact@andersonandra.de>

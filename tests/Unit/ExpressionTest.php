@@ -1,8 +1,8 @@
 <?php
 
-use \Prettus\FIQL\Expression;
-use \Prettus\FIQL\Constraint;
-use \Prettus\FIQL\Operator;
+use \Prettus\FIQLParser\Expression;
+use \Prettus\FIQLParser\Constraint;
+use \Prettus\FIQLParser\Operator;
 
 test('constructor of expression', function() {
     $expression = new Expression();

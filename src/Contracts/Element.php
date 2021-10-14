@@ -1,6 +1,6 @@
 <?php
 
-namespace Prettus\FIQL\Contracts;
+namespace Prettus\FIQLParser\Contracts;
 
 /**
  * @author Anderson Andrade <contact@andersonandra.de>

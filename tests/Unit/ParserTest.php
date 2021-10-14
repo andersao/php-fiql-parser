@@ -1,8 +1,8 @@
 <?php
 
-use \Prettus\FIQL\Parser;
-use \Prettus\FIQL\Expression;
-use \Prettus\FIQL\Exceptions\FiqlException;
+use \Prettus\FIQLParser\Parser;
+use \Prettus\FIQLParser\Expression;
+use \Prettus\FIQLParser\Exceptions\FiqlException;
 
 
 test('parse str to expression constraint only', function($fiqlStr, $expectedArray = []) {

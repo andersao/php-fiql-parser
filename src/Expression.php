@@ -1,9 +1,9 @@
 <?php
 
-namespace Prettus\FIQL;
+namespace Prettus\FIQLParser;
 
-use \Prettus\FIQL\Contracts\Element;
-use \Prettus\FIQL\Element as BaseElement;
+use \Prettus\FIQLParser\Contracts\Element;
+use \Prettus\FIQLParser\Element as BaseElement;
 
 /**
  * @author Anderson Andrade <contact@andersonandra.de>

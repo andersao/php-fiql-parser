@@ -1,8 +1,8 @@
 <?php
 
-namespace Prettus\FIQL;
+namespace Prettus\FIQLParser;
 
-use \Prettus\FIQL\Exceptions\FIQLObjectException;
+use \Prettus\FIQLParser\Exceptions\FIQLObjectException;
 
 const OPERATOR_MAP = [
     ';' => ['and', 2],

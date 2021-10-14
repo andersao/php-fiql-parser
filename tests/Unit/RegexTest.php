@@ -1,6 +1,6 @@
 <?php
 
-use \Prettus\FIQL\Constants;
+use \Prettus\FIQLParser\Constants;
 
 function array_flatten($array) { 
     if (!is_array($array)) { 

@@ -1,8 +1,8 @@
 <?php
 
-use \Prettus\FIQL\Constraint;
-use \Prettus\FIQL\Expression;
-use \Prettus\FIQL\Exceptions\FIQLObjectException;
+use \Prettus\FIQLParser\Constraint;
+use \Prettus\FIQLParser\Expression;
+use \Prettus\FIQLParser\Exceptions\FIQLObjectException;
 
 test('should init a Constraint', function() {
     $constraint = new Constraint('foo', '==', 'bar');

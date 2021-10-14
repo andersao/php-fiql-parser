@@ -1,9 +1,9 @@
 <?php
 
-namespace Prettus\FIQL;
+namespace Prettus\FIQLParser;
 
-use \Prettus\FIQL\Exceptions\FIQLObjectException;
-use \Prettus\FIQL\Element as BaseElement;
+use \Prettus\FIQLParser\Exceptions\FIQLObjectException;
+use \Prettus\FIQLParser\Element as BaseElement;
 
 const COMPARISON_MAP = [
     '==' => '==',

@@ -1,8 +1,8 @@
 <?php
 
-namespace Prettus\FIQL;
+namespace Prettus\FIQLParser;
 
-use \Prettus\FIQL\Exceptions\FiqlFormatException;
+use \Prettus\FIQLParser\Exceptions\FiqlFormatException;
 
 /**
  * @author Anderson Andrade <contact@andersonandra.de>

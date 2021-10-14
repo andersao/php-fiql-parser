@@ -1,6 +1,6 @@
 <?php
 
-namespace Prettus\FIQL;
+namespace Prettus\FIQLParser;
 
 /**
  * @author Anderson Andrade <contact@andersonandra.de>
