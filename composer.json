@@ -13,7 +13,8 @@
   "scripts": {
     "test": "pest",
     "test:unit": "@test --watch",
-    "test:ci": "@test --ci --coverage"
+    "test:ci": "@test --ci",
+    "test:coverage": "@test --ci --coverage --coverage-clover coverage.clover"
   },
   "authors": [
     {
