@@ -1,8 +1,10 @@
 {
-  "name": "anderson/php-fiql-parser",
+  "name": "prettus/php-fiql-parser",
+  "description": "FIQL Parser",
   "type": "library",
   "keywords": [
-    "fiql"
+    "fiql",
+    "parser"
   ],
   "license": "MIT",
   "autoload": {
@@ -19,14 +21,25 @@
   "authors": [
     {
       "name": "Anderson Andrade",
-      "email": "anderson.asa89@gmail.com"
+      "homepage": "http://andersonandra.de",
+      "email": "contato@andersonandra.de",
+      "role": "Developer"
     }
   ],
+  "homepage": "https://github.com/andersao/php-fiql-parser",
+  "support": {
+    "email": "contato@andersonandra.de",
+    "issues":"https://github.com/andersao/php-fiql-parser/issues",
+    "wiki":"https://github.com/andersao/php-fiql-parser",
+    "source":"https://github.com/andersao/php-fiql-parser",
+    "docs": "https://github.com/andersao/php-fiql-parser"
+  },
   "config": {
     "preferred-install": "dist"
   },
   "require-dev": {
     "pestphp/pest": "^1.20",
     "pestphp/pest-plugin-watch": "dev-master"
-  }
+  },
+  "minimum-stability": "stable"
 }
