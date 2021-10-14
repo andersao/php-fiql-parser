@@ -1,5 +1,9 @@
 ## FIQL Parser
 
+[![Latest Stable Version](http://poser.pugx.org/prettus/php-fiql-parser/v)](https://packagist.org/packages/prettus/php-fiql-parser)
+[![Total Downloads](http://poser.pugx.org/prettus/php-fiql-parser/downloads)](https://packagist.org/packages/prettus/php-fiql-parser)
+[![License](http://poser.pugx.org/prettus/php-fiql-parser/license)](https://packagist.org/packages/prettus/php-fiql-parser)
+[![PHP Version Require](http://poser.pugx.org/prettus/php-fiql-parser/require/php)](https://packagist.org/packages/prettus/php-fiql-parser)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e4204205a1e289b03f18/maintainability)](https://codeclimate.com/github/andersao/php-fiql-parser/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e4204205a1e289b03f18/test_coverage)](https://codeclimate.com/github/andersao/php-fiql-parser/test_coverage)
 
